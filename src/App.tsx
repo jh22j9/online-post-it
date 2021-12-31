@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
+import './Styles/_global.scss';
 
 const App: React.FC = () => {
   return (

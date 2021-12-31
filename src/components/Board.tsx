@@ -3,8 +3,10 @@ import PostIt from './PostIt';
 
 const Board: React.FC = () => {
   return (
-    <section>
-      <PostIt />
+    <section className="board-wrapper">
+      <div className="board">
+        <PostIt />
+      </div>
     </section>
   );
 };

@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500&family=IBM+Plex+Mono:wght@300;600;700&family=IBM+Plex+Sans+KR:wght@200;500&family=Noto+Sans+KR:wght@100;400;500&family=Work+Sans:wght@100;300;700;800&display=swap');
+
+@import '../components/Main.scss';
+@import '../components/Header.scss';
+@import '../components/Sidebar.scss';
+@import '../components/Board.scss';
+
+* {
+  box-sizing: border-box;
+  font-family: 'IBM Plex Mono', monospace;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}

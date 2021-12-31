@@ -1,0 +1,7 @@
+@import '../Styles/variables';
+
+main {
+  height: 100vh - $header-height;
+  display: flex;
+  padding: 0 2rem 2rem 0;
+}
