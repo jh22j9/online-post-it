@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HiMinusCircle } from 'react-icons/hi';
 import { RiCloseCircleFill } from 'react-icons/ri';
+import { IState as Props } from './Board';
 interface IProps {
   item: {
     id: number;
@@ -8,9 +9,11 @@ interface IProps {
     content: string;
     positions: number[];
   };
+  postItList: Props['postItList'];
+  setPostItList: React.Dispatch<React.SetStateAction<Props['postItList']>>;
 }
 
-const PostIt: React.FC<IProps> = ({ item }) => {
+const PostIt: React.FC<IProps> = ({ item, postItList, setPostItList }) => {
   const [input, setInput] = useState({
     title: '제목을 입력하세요.',
     content: '내용을 입력하세요.',
@@ -30,8 +33,20 @@ const PostIt: React.FC<IProps> = ({ item }) => {
     });
   };
 
-  const handleHideButton = () => {
-    setHidden(!hidden);
+  const handleIconClick = (button: string, id?: number) => {
+    switch (button) {
+      case 'hide':
+        setHidden(!hidden);
+        break;
+      case 'delete':
+        {
+          const newPostItList = postItList.filter((postIt) => postIt.id !== id);
+          setPostItList(newPostItList);
+        }
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -39,8 +54,8 @@ const PostIt: React.FC<IProps> = ({ item }) => {
       <div className="title-bar">
         <input type="text" onChange={handleChange} name="title" value={input.title} />
         <div className="icons">
-          <HiMinusCircle className="icon" onClick={handleHideButton} />
-          <RiCloseCircleFill className="icon" />
+          <HiMinusCircle className="icon" onClick={() => handleIconClick('hide')} />
+          <RiCloseCircleFill className="icon" onClick={() => handleIconClick('delete', item.id)} />
         </div>
       </div>
       <textarea onChange={handleChange} name="content" value={input.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} />

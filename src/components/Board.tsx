@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import PostIt from './PostIt';
 
+export interface IState {
+  postItList: {
+    id: number;
+    title: string;
+    content: string;
+    positions: number[];
+  }[];
+}
+
 const Board: React.FC = () => {
   const [postItList, setPostItList] = useState([{ id: 1, title: '', content: '', positions: [30, 30] }]);
 
@@ -22,7 +31,7 @@ const Board: React.FC = () => {
     <section className="board-wrapper">
       <div className="board" onDoubleClick={handleDoubleClick}>
         {postItList.map((postIt) => (
-          <PostIt item={postIt} key={postIt.id} />
+          <PostIt item={postIt} key={postIt.id} postItList={postItList} setPostItList={setPostItList} />
         ))}
       </div>
     </section>
