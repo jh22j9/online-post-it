@@ -11,16 +11,17 @@ interface IProps {
 }
 
 const PostIt: React.FC<IProps> = ({ item }) => {
-  const [x, y] = item.positions;
-  const style = {
-    left: `${x}px`,
-    top: `${y}px`,
-  };
-
   const [input, setInput] = useState({
     title: '제목을 입력하세요.',
     content: '내용을 입력하세요.',
   });
+  const [hidden, setHidden] = useState(false);
+  const [x, y] = item.positions;
+
+  const style = {
+    left: `${x}px`,
+    top: `${y}px`,
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInput({
@@ -29,16 +30,20 @@ const PostIt: React.FC<IProps> = ({ item }) => {
     });
   };
 
+  const handleHideButton = () => {
+    setHidden(!hidden);
+  };
+
   return (
     <div className="postIt-wrapper" style={style}>
       <div className="title-bar">
         <input type="text" onChange={handleChange} name="title" value={input.title} />
         <div className="icons">
-          <HiMinusCircle />
-          <RiCloseCircleFill />
+          <HiMinusCircle className="icon" onClick={handleHideButton} />
+          <RiCloseCircleFill className="icon" />
         </div>
       </div>
-      <textarea onChange={handleChange} name="content" value={input.content} />
+      <textarea onChange={handleChange} name="content" value={input.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} />
     </div>
   );
 };
