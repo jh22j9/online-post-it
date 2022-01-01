@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PostIt from './PostIt';
-import { useDispatch, useSelector } from 'react-redux';
-import { State } from '../state';
-import { addPostIt } from '../state/action-creators';
 
 const Board: React.FC = () => {
-  const dispatch = useDispatch();
-  const boardState = useSelector((state: State) => state.postBoard);
+  const [postItList, setPostItList] = useState([{ id: 1, title: '제목1', content: '내용1', positions: [10, 10] }]);
+
+  const handleDoubleClick = (e: React.MouseEvent<HTMLElement>) => {
+    const x = e.nativeEvent.offsetX;
+    const y = e.nativeEvent.offsetY;
+    setPostItList([
+      ...postItList,
+      {
+        id: postItList.length + 1,
+        title: '제목2',
+        content: '내용2',
+        positions: [x, y],
+      },
+    ]);
+  };
 
   return (
     <section className="board-wrapper">
-      <div className="board">
-        <h1>{boardState}</h1>
-        <button onClick={() => dispatch(addPostIt(1))}>button</button>
-        <PostIt />
+      <div className="board" onDoubleClick={handleDoubleClick}>
+        {postItList.map((postIt) => (
+          <PostIt item={postIt} key={postIt.id} />
+        ))}
       </div>
     </section>
   );
