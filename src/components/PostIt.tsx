@@ -18,8 +18,8 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   };
 
   const [input, setInput] = useState({
-    title: '',
-    content: '',
+    title: '제목을 입력하세요.',
+    content: '내용을 입력하세요.',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,14 +31,14 @@ const PostIt: React.FC<IProps> = ({ item }) => {
 
   return (
     <div className="postIt-wrapper" style={style}>
-      <div className="postIt-title-bar">
+      <div className="title-bar">
         <input type="text" onChange={handleChange} name="title" value={input.title} />
         <div className="icons">
           <HiMinusCircle />
           <RiCloseCircleFill />
         </div>
       </div>
-      <textarea onChange={handleChange} className="postIt-content" name="content" value={input.content} />
+      <textarea onChange={handleChange} name="content" value={input.content} />
     </div>
   );
 };
