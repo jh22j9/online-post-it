@@ -11,8 +11,8 @@ const Board: React.FC = () => {
       ...postItList,
       {
         id: postItList.length + 1,
-        title: '제목2',
-        content: '내용2',
+        title: '',
+        content: '',
         positions: [x, y],
       },
     ]);

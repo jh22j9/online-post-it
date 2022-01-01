@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HiMinusCircle } from 'react-icons/hi';
 import { RiCloseCircleFill } from 'react-icons/ri';
-interface IState {
+interface IProps {
   item: {
     id: number;
     title: string;
@@ -10,24 +10,35 @@ interface IState {
   };
 }
 
-const PostIt: React.FC<IState> = ({ item }) => {
+const PostIt: React.FC<IProps> = ({ item }) => {
   const [x, y] = item.positions;
-
   const style = {
     left: `${x}px`,
     top: `${y}px`,
   };
 
+  const [input, setInput] = useState({
+    title: '',
+    content: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div className="postIt-wrapper" style={style}>
       <div className="postIt-title-bar">
-        {item.title}
+        <input type="text" onChange={handleChange} name="title" value={input.title} />
         <div className="icons">
           <HiMinusCircle />
           <RiCloseCircleFill />
         </div>
       </div>
-      <div className="postIt-content">{item.content}</div>
+      <textarea onChange={handleChange} className="postIt-content" name="content" value={input.content} />
     </div>
   );
 };
