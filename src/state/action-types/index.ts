@@ -4,4 +4,5 @@ export enum ActionType {
   SELECT_BOARD = 'selectBoard',
   DELETE_POST_IT = 'deletePostIt',
   HIDE_POST_IT = 'hidePostIt',
+  DELETE_BOARD = 'deleteBoard',
 }

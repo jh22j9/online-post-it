@@ -22,3 +22,7 @@ export const hidePostIt = (id: number): Action => ({
   type: ActionType.HIDE_POST_IT,
   payload: id,
 });
+export const deleteBoard = (id: number): Action => ({
+  type: ActionType.DELETE_BOARD,
+  payload: id,
+});

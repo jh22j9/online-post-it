@@ -93,6 +93,17 @@ const reducer = (state: StateInterface = initialState, action: Action): StateInt
           });
         }
         break;
+      case ActionType.DELETE_BOARD:
+        {
+          if (state.boardList.length === 1) return;
+          const deletedId = action.payload;
+          const newBoardList = state.boardList.filter((board) => board.bId !== deletedId);
+          draft.boardList = newBoardList;
+          if (state.currentBoard.bId === deletedId) {
+            draft.currentBoard = newBoardList[0];
+          }
+        }
+        break;
       default:
         return state;
     }

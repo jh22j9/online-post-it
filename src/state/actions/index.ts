@@ -19,5 +19,9 @@ interface HidePostItAction {
   type: ActionType.HIDE_POST_IT;
   payload?: number;
 }
+interface DeleteBoardAction {
+  type: ActionType.DELETE_BOARD;
+  payload?: number;
+}
 
-export type Action = AddBoardAction | AddPostItAction | SelectBoardAction | DeletePostItAction | HidePostItAction;
+export type Action = AddBoardAction | AddPostItAction | SelectBoardAction | DeletePostItAction | HidePostItAction | DeleteBoardAction;
