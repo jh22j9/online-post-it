@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
 import { HiMinusCircle } from 'react-icons/hi';
-import { RiCloseCircleFill } from 'react-icons/ri';
-import { IState as Props } from './Board';
+// import { RiCloseCircleFill } from 'react-icons/ri';
+import { PostItInterface } from '../state/reducers/boardReducer';
+
 interface IProps {
-  item: {
-    id: number;
-    title: string;
-    content: string;
-    positions: number[];
-  };
-  postItList: Props['postItList'];
-  setPostItList: React.Dispatch<React.SetStateAction<Props['postItList']>>;
+  item: PostItInterface;
 }
 
-const PostIt: React.FC<IProps> = ({ item, postItList, setPostItList }) => {
-  const [input, setInput] = useState({
-    title: '제목을 입력하세요.',
-    content: '내용을 입력하세요.',
-  });
+const PostIt: React.FC<IProps> = ({ item }) => {
   const [hidden, setHidden] = useState(false);
   const [x, y] = item.positions;
 
@@ -26,23 +16,24 @@ const PostIt: React.FC<IProps> = ({ item, postItList, setPostItList }) => {
     top: `${y}px`,
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //   setInput({
+  //     ...input,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
-  const handleIconClick = (button: string, id?: number) => {
+  // const handleIconClick = (button: string, id?: number) => {
+  const handleIconClick = (button: string) => {
     switch (button) {
       case 'hide':
         setHidden(!hidden);
         break;
       case 'delete':
-        {
-          const newPostItList = postItList.filter((postIt) => postIt.id !== id);
-          setPostItList(newPostItList);
-        }
+        // {
+        //   const newPostItList = postItList.filter((postIt) => postIt.id !== id);
+        //   setPostItList(newPostItList);
+        // }
         break;
       default:
         break;
@@ -52,13 +43,15 @@ const PostIt: React.FC<IProps> = ({ item, postItList, setPostItList }) => {
   return (
     <div className="postIt-wrapper" style={style}>
       <div className="title-bar">
-        <input type="text" onChange={handleChange} name="title" value={input.title} />
+        {/* <input type="text" onChange={handleChange} name="title" value={input.title} /> */}
+        <input type="text" name="title" value={item.title} />
         <div className="icons">
           <HiMinusCircle className="icon" onClick={() => handleIconClick('hide')} />
-          <RiCloseCircleFill className="icon" onClick={() => handleIconClick('delete', item.id)} />
+          {/* <RiCloseCircleFill className="icon" onClick={() => handleIconClick('delete', item.id)} /> */}
         </div>
       </div>
-      <textarea onChange={handleChange} name="content" value={input.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} />
+      {/* <textarea onChange={handleChange} name="content" value={item.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} /> */}
+      <textarea name="content" value={item.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} />
     </div>
   );
 };

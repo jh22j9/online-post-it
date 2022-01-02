@@ -21,7 +21,7 @@ export interface StateInterface {
 }
 
 const boardList = [
-  { bId: 1, name: 'Board1', postItList: [] },
+  { bId: 1, name: 'Board1', postItList: [{ pId: 1, title: '포스트잇1', content: '내용', positions: [30, 0] }] },
   { bId: 2, name: 'Board2', postItList: [] },
 ];
 
