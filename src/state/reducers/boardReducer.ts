@@ -2,15 +2,15 @@ import { Action } from '../actions';
 import { ActionType } from '../action-types';
 
 export interface PostItInterface {
-  postItid: number;
+  pId: number;
   title: string;
   content: string;
   positions: number[];
 }
 
 export interface BoardInterface {
-  boardId: number;
-  boardName: string;
+  bId: number;
+  name: string;
   postItList: PostItInterface[];
 }
 
@@ -22,13 +22,16 @@ export interface StateInterface {
 
 const initialState: StateInterface = {
   currentBoardId: 1,
-  boardList: [],
+  boardList: [
+    { bId: 1, name: 'Board1', postItList: [] },
+    { bId: 2, name: 'Board2', postItList: [] },
+  ],
 };
 
 const reducer = (state: StateInterface = initialState, action: Action): StateInterface => {
   switch (action.type) {
     case ActionType.ADD_BOARD: {
-      const newBoard = { boardId: state.boardList.length + 1, boardName: '', postItList: [] };
+      const newBoard = { bId: state.boardList.length + 1, name: '', postItList: [] };
       return { ...state, boardList: [...state.boardList, newBoard] };
     }
     case ActionType.ADD_POST_IT:
