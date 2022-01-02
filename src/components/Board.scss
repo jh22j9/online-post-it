@@ -6,7 +6,11 @@
   border-radius: 1rem;
   position: relative;
   display: flex;
-  .board {
+  flex-direction: column;
+  .board-title {
+    height: 2rem;
+  }
+  .board-content {
     width: 100%;
     height: 100%;
   }

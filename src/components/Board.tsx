@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PostIt from './PostIt';
+import { useSelector } from 'react-redux';
+import { State } from '../state';
 
 export interface IState {
   postItList: {
@@ -11,6 +13,9 @@ export interface IState {
 }
 
 const Board: React.FC = () => {
+  const { currentBoard } = useSelector((state: State) => state.postBoard);
+  console.log('currentBoard', currentBoard);
+
   const [postItList, setPostItList] = useState([{ id: 1, title: '', content: '', positions: [30, 30] }]);
 
   const handleDoubleClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -29,7 +34,8 @@ const Board: React.FC = () => {
 
   return (
     <section className="board-wrapper">
-      <div className="board" onDoubleClick={handleDoubleClick}>
+      <div className="board-title">{}</div>
+      <div className="board-content" onDoubleClick={handleDoubleClick}>
         {postItList.map((postIt) => (
           <PostIt item={postIt} key={postIt.id} postItList={postItList} setPostItList={setPostItList} />
         ))}
