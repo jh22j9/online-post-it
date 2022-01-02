@@ -2,4 +2,20 @@
 
 .sidebar-wrapper {
   width: $sidebar-width;
+  padding: 0 2rem 0 3rem;
+  li {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  .add-icon {
+    background-color: #000;
+    width: 100%;
+    height: 1.2rem;
+    border-radius: 0.3rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
