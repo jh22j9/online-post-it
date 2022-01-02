@@ -1,10 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../state';
 import { HiPlusSm } from 'react-icons/hi';
+import { addBoard } from '../state/action-creators';
 
 const Sidebar: React.FC = () => {
   const boardList = useSelector((state: State) => state.postBoard.boardList);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(addBoard());
+  };
 
   return (
     <section className="sidebar-wrapper">
@@ -13,7 +19,7 @@ const Sidebar: React.FC = () => {
           <li key={board.bId}>{board.name}</li>
         ))}
       </ul>
-      <HiPlusSm className="add-icon" />
+      <HiPlusSm className="add-icon" onClick={handleClick} />
     </section>
   );
 };

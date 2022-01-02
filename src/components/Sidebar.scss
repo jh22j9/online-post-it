@@ -5,7 +5,7 @@
   padding: 0 2rem 0 3rem;
   li {
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.7rem;
     font-size: 1.2rem;
   }
   .add-icon {
@@ -17,5 +17,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    margin-top: 1rem;
   }
 }
