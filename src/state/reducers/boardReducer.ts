@@ -58,6 +58,12 @@ const reducer = (state: StateInterface = initialState, action: Action): StateInt
           });
         }
         break;
+      case ActionType.SELECT_BOARD:
+        {
+          const selected = state.boardList.find((board) => board.bId === action.payload) || state.currentBoard;
+          draft.currentBoard = selected;
+        }
+        break;
       default:
         return state;
     }

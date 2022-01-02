@@ -9,3 +9,8 @@ export const addPostIt = (positions: number[]): Action => ({
   type: ActionType.ADD_POST_IT,
   payload: positions,
 });
+
+export const selectBoard = (id: number): Action => ({
+  type: ActionType.SELECT_BOARD,
+  payload: id,
+});
