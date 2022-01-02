@@ -1,12 +1,11 @@
 import { ActionType } from '../action-types';
-// import { Action } from '../actions';
-import { PostItInterface } from '../reducers/boardReducer';
+import { Action } from '../actions';
 
-export const addBoard = () => ({
+export const addBoard = (): Action => ({
   type: ActionType.ADD_BOARD,
 });
 
-export const addPostIt = (newPostIt: PostItInterface) => ({
+export const addPostIt = (positions: number[]): Action => ({
   type: ActionType.ADD_POST_IT,
-  payload: newPostIt,
+  payload: positions,
 });

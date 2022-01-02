@@ -1,17 +1,19 @@
 import React from 'react';
 import PostIt from './PostIt';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../state';
+import { addPostIt } from '../state/action-creators';
 
 const Board: React.FC = () => {
   const { currentBoard } = useSelector((state: State) => state.postBoard);
   const { postItList } = currentBoard;
 
+  const dispatch = useDispatch();
+
   const handleDoubleClick = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e.nativeEvent.offsetX);
-    // const x = e.nativeEvent.offsetX;
-    // const y = e.nativeEvent.offsetY;
-    // dispatch(addPostIt(x, y));
+    const event = e.nativeEvent;
+    const [x, y] = [event.offsetX, event.offsetY];
+    dispatch(addPostIt([x, y]));
   };
 
   return (

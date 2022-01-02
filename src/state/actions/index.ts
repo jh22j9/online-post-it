@@ -1,4 +1,3 @@
-import { PostItInterface } from './../reducers/boardReducer';
 import { ActionType } from '../action-types';
 
 interface AddBoardAction {
@@ -6,7 +5,7 @@ interface AddBoardAction {
 }
 interface AddPostItAction {
   type: ActionType.ADD_POST_IT;
-  payload: PostItInterface;
+  payload: number[];
 }
 
 export type Action = AddBoardAction | AddPostItAction;
