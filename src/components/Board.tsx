@@ -34,7 +34,9 @@ const Board: React.FC = () => {
 
   return (
     <section className="board-wrapper">
-      <div className="board-title">{}</div>
+      <div className="board-title-bar">
+        <h2>✔️ {currentBoard.name}</h2>
+      </div>
       <div className="board-content" onDoubleClick={handleDoubleClick}>
         {postItList.map((postIt) => (
           <PostIt item={postIt} key={postIt.id} postItList={postItList} setPostItList={setPostItList} />
