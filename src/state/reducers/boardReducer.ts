@@ -7,6 +7,7 @@ export interface PostItInterface {
   title: string;
   content: string;
   positions: number[];
+  hidden: boolean;
 }
 
 export interface BoardInterface {
@@ -30,6 +31,7 @@ const postIt = {
   title: '제목을 입력하세요.',
   content: '내용을 입력하세요',
   positions: [],
+  hidden: false,
 };
 
 const initialState: StateInterface = {
@@ -71,6 +73,21 @@ const reducer = (state: StateInterface = initialState, action: Action): StateInt
           draft.boardList.forEach((board) => {
             if (board.bId === currentId) {
               board.postItList = board.postItList.filter((item) => item.pId !== action.payload);
+              draft.currentBoard = board;
+            }
+          });
+        }
+        break;
+      case ActionType.HIDE_POST_IT:
+        {
+          const currentId = state.currentBoard.bId;
+          draft.boardList.forEach((board) => {
+            if (board.bId === currentId) {
+              board.postItList.forEach((item) => {
+                if (item.pId === action.payload) {
+                  item.hidden = !item.hidden;
+                }
+              });
               draft.currentBoard = board;
             }
           });
