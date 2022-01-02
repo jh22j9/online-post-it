@@ -14,3 +14,7 @@ export const selectBoard = (id: number): Action => ({
   type: ActionType.SELECT_BOARD,
   payload: id,
 });
+export const deletePostIt = (id?: number): Action => ({
+  type: ActionType.DELETE_POST_IT,
+  payload: id,
+});

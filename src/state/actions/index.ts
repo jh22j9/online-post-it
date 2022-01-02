@@ -11,5 +11,9 @@ interface SelectBoardAction {
   type: ActionType.SELECT_BOARD;
   payload: number;
 }
+interface DeletePostItAction {
+  type: ActionType.DELETE_POST_IT;
+  payload?: number;
+}
 
-export type Action = AddBoardAction | AddPostItAction | SelectBoardAction;
+export type Action = AddBoardAction | AddPostItAction | SelectBoardAction | DeletePostItAction;

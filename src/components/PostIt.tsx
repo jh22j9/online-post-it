@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { HiMinusCircle } from 'react-icons/hi';
-// import { RiCloseCircleFill } from 'react-icons/ri';
+import { RiCloseCircleFill } from 'react-icons/ri';
 import { PostItInterface } from '../state/reducers/boardReducer';
+import { useDispatch } from 'react-redux';
+import { deletePostIt } from '../state/action-creators';
 
 interface IProps {
   item: PostItInterface;
@@ -10,12 +12,12 @@ interface IProps {
 const PostIt: React.FC<IProps> = ({ item }) => {
   const [hidden, setHidden] = useState(false);
   const [x, y] = item.positions;
-
   const style = {
     left: `${x}px`,
     top: `${y}px`,
   };
 
+  const dispatch = useDispatch();
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
   //   setInput({
   //     ...input,
@@ -24,16 +26,15 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   // };
 
   // const handleIconClick = (button: string, id?: number) => {
-  const handleIconClick = (button: string) => {
+  const handleIconClick = (button: string, id?: number) => {
     switch (button) {
       case 'hide':
         setHidden(!hidden);
         break;
       case 'delete':
-        // {
-        //   const newPostItList = postItList.filter((postIt) => postIt.id !== id);
-        //   setPostItList(newPostItList);
-        // }
+        {
+          dispatch(deletePostIt(id));
+        }
         break;
       default:
         break;
@@ -47,11 +48,10 @@ const PostIt: React.FC<IProps> = ({ item }) => {
         <input type="text" name="title" value={item.title} />
         <div className="icons">
           <HiMinusCircle className="icon" onClick={() => handleIconClick('hide')} />
-          {/* <RiCloseCircleFill className="icon" onClick={() => handleIconClick('delete', item.id)} /> */}
+          <RiCloseCircleFill className="icon" onClick={() => handleIconClick('delete', item.pId)} />
         </div>
       </div>
       {/* <textarea onChange={handleChange} name="content" value={item.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} /> */}
-      <textarea name="content" value={item.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} />
     </div>
   );
 };
