@@ -13,11 +13,11 @@ const Sidebar: React.FC = () => {
     dispatch(selectBoard(id));
   };
 
-  const handleBtnClick = () => {
+  const handleAddClick = () => {
     dispatch(addBoard());
   };
 
-  const handleDelete = (id: number) => {
+  const handleDeleteClick = (id: number) => {
     dispatch(deleteBoard(id));
   };
 
@@ -27,13 +27,13 @@ const Sidebar: React.FC = () => {
         {boardList.map((board) => (
           <li key={board.bId}>
             <p onClick={() => handleBoardClick(board.bId)}>{board.name}</p>
-            <span onClick={() => handleDelete(board.bId)} style={{ visibility: lastBoard ? 'hidden' : 'visible' }}>
+            <span onClick={() => handleDeleteClick(board.bId)} style={{ visibility: lastBoard ? 'hidden' : 'visible' }}>
               <HiX />
             </span>
           </li>
         ))}
       </ul>
-      <HiPlusSm className="add-icon" onClick={handleBtnClick} />
+      <HiPlusSm className="add-icon" onClick={handleAddClick} />
     </section>
   );
 };
