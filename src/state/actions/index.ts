@@ -31,6 +31,10 @@ interface UpdateBoardNameAction {
   type: ActionType.UPDATE_BOARD_NAME;
   payload: { id: number; value: string };
 }
+interface UpdatePostItAction {
+  type: ActionType.UPDATE_POST_IT;
+  payload: { id: number; field: string; value: string };
+}
 
 export type Action =
   | AddBoardAction
@@ -40,4 +44,5 @@ export type Action =
   | HidePostItAction
   | DeleteBoardAction
   | SetModalAction
-  | UpdateBoardNameAction;
+  | UpdateBoardNameAction
+  | UpdatePostItAction;

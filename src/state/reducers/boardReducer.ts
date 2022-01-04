@@ -4,7 +4,7 @@ import { ActionType } from '../action-types';
 
 export interface PostItInterface {
   pId: number;
-  title: string;
+  [title: string]: any;
   content: string;
   positions: number[];
   hidden: boolean;
@@ -26,8 +26,8 @@ const boardList = [{ bId: 1, name: 'Board', postItList: [] }];
 
 const postIt = {
   pId: 0,
-  title: '제목을 입력하세요.',
-  content: '내용을 입력하세요',
+  title: '',
+  content: '',
   positions: [],
   hidden: false,
 };
@@ -112,6 +112,22 @@ const reducer = (state: StateInterface = initialState, action: Action): StateInt
           draft.boardList.forEach((board) => {
             if (board.bId === id) {
               board.name = value;
+              draft.currentBoard = board;
+            }
+          });
+        }
+        break;
+      case ActionType.UPDATE_POST_IT:
+        {
+          const currentId = state.currentBoard.bId;
+          const { id, field, value } = action.payload;
+          draft.boardList.forEach((board) => {
+            if (board.bId === currentId) {
+              board.postItList.forEach((item) => {
+                if (item.pId === id) {
+                  item[field] = value;
+                }
+              });
               draft.currentBoard = board;
             }
           });

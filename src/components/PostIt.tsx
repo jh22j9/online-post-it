@@ -4,7 +4,7 @@ import { RiCloseCircleFill } from 'react-icons/ri';
 import { PostItInterface } from '../state/reducers/boardReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../state';
-import { deletePostIt, hidePostIt, setModal } from '../state/action-creators';
+import { deletePostIt, hidePostIt, setModal, updatePostIt } from '../state/action-creators';
 import { Modal, Text, Button, Row } from '@nextui-org/react';
 interface IProps {
   item: PostItInterface;
@@ -28,6 +28,15 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   //     [e.target.name]: e.target.value,
   //   });
   // };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const payload = {
+      id: item.pId,
+      field: e.target.name,
+      value: e.target.value,
+    };
+    dispatch(updatePostIt(payload));
+  };
 
   const handleIconClick = (button: string) => {
     switch (button) {
@@ -54,15 +63,13 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   return (
     <div className="postIt-wrapper" style={style}>
       <div className="title-bar">
-        {/* <input type="text" onChange={handleChange} name="title" value={input.title} /> */}
-        <input type="text" name="title" value={item.title} />
+        <input onChange={handleInputChange} type="text" name="title" value={item.title} />
         <div className="icons">
           <HiMinusCircle className="icon" onClick={() => handleIconClick('hide')} />
           <RiCloseCircleFill className="icon" onClick={() => handleIconClick('delete')} />
         </div>
       </div>
-      {/* <textarea onChange={handleChange} name="content" value={item.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} /> */}
-      <textarea name="content" value={item.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} />
+      <textarea onChange={handleInputChange} name="content" value={item.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} />
       <Modal open={isModalOpen} onClose={handleClose} width="22rem">
         <Modal.Header />
         <Modal.Body>

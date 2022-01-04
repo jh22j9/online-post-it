@@ -34,3 +34,7 @@ export const updateBoardName = (data: { id: number; value: string }): Action => 
   type: ActionType.UPDATE_BOARD_NAME,
   payload: data,
 });
+export const updatePostIt = (data: { id: number; field: string; value: string }): Action => ({
+  type: ActionType.UPDATE_POST_IT,
+  payload: data,
+});
