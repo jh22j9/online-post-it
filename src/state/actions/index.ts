@@ -27,6 +27,10 @@ interface SetModalAction {
   type: ActionType.SET_MODAL;
   payload: boolean;
 }
+interface UpdateBoardNameAction {
+  type: ActionType.UPDATE_BOARD_NAME;
+  payload: { id: number; value: string };
+}
 
 export type Action =
   | AddBoardAction
@@ -35,4 +39,5 @@ export type Action =
   | DeletePostItAction
   | HidePostItAction
   | DeleteBoardAction
-  | SetModalAction;
+  | SetModalAction
+  | UpdateBoardNameAction;

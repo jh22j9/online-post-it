@@ -13,6 +13,17 @@
     border-radius: 1rem;
     padding: 2rem;
     font-size: 0.9rem;
+    h2 {
+      span {
+        margin-right: 0.3rem;
+      }
+      input {
+        border: none;
+        font-size: 1.4rem;
+        font-weight: bold;
+        outline: none;
+      }
+    }
   }
   .board-content {
     width: 100%;

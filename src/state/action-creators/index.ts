@@ -30,3 +30,7 @@ export const setModal = (value: boolean): Action => ({
   type: ActionType.SET_MODAL,
   payload: value,
 });
+export const updateBoardName = (data: { id: number; value: string }): Action => ({
+  type: ActionType.UPDATE_BOARD_NAME,
+  payload: data,
+});

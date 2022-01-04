@@ -22,10 +22,7 @@ export interface StateInterface {
   isModalOpen: boolean;
 }
 
-const boardList = [
-  { bId: 1, name: 'Board1', postItList: [] },
-  { bId: 2, name: 'Board2', postItList: [] },
-];
+const boardList = [{ bId: 1, name: 'Board1', postItList: [] }];
 
 const postIt = {
   pId: 0,
@@ -108,6 +105,17 @@ const reducer = (state: StateInterface = initialState, action: Action): StateInt
         break;
       case ActionType.SET_MODAL:
         draft.isModalOpen = action.payload;
+        break;
+      case ActionType.UPDATE_BOARD_NAME:
+        {
+          const { id, value } = action.payload;
+          draft.boardList.forEach((board) => {
+            if (board.bId === id) {
+              board.name = value;
+              draft.currentBoard = board;
+            }
+          });
+        }
         break;
       default:
         return state;
