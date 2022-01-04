@@ -22,7 +22,7 @@ export interface StateInterface {
   isModalOpen: boolean;
 }
 
-const boardList = [{ bId: 1, name: 'Board1', postItList: [] }];
+const boardList = [{ bId: 1, name: 'Board', postItList: [] }];
 
 const postIt = {
   pId: 0,
