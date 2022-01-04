@@ -26,3 +26,7 @@ export const deleteBoard = (id: number): Action => ({
   type: ActionType.DELETE_BOARD,
   payload: id,
 });
+export const setModal = (value: boolean): Action => ({
+  type: ActionType.SET_MODAL,
+  payload: value,
+});

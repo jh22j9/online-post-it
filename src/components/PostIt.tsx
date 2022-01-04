@@ -4,14 +4,14 @@ import { RiCloseCircleFill } from 'react-icons/ri';
 import { PostItInterface } from '../state/reducers/boardReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../state';
-import { deletePostIt, hidePostIt } from '../state/action-creators';
-
+import { deletePostIt, hidePostIt, setModal } from '../state/action-creators';
+import { Modal, Text, Button, Row } from '@nextui-org/react';
 interface IProps {
   item: PostItInterface;
 }
 
 const PostIt: React.FC<IProps> = ({ item }) => {
-  const { currentBoard } = useSelector((state: State) => state.postBoard);
+  const { currentBoard, isModalOpen } = useSelector((state: State) => state.postBoard);
   const { postItList } = currentBoard;
   const hidden = postItList.find((postIt) => postIt.pId === item.pId)?.hidden;
 
@@ -29,18 +29,26 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   //   });
   // };
 
-  // const handleIconClick = (button: string, id?: number) => {
-  const handleIconClick = (button: string, id: number) => {
+  const handleIconClick = (button: string) => {
     switch (button) {
       case 'hide':
-        dispatch(hidePostIt(id));
+        dispatch(hidePostIt(item.pId));
         break;
       case 'delete':
-        dispatch(deletePostIt(id));
+        dispatch(setModal(true));
         break;
       default:
         break;
     }
+  };
+
+  const handleClose = () => {
+    dispatch(setModal(false));
+  };
+
+  const handleDeleteConfirm = () => {
+    dispatch(setModal(false));
+    dispatch(deletePostIt(item.pId));
   };
 
   return (
@@ -49,12 +57,28 @@ const PostIt: React.FC<IProps> = ({ item }) => {
         {/* <input type="text" onChange={handleChange} name="title" value={input.title} /> */}
         <input type="text" name="title" value={item.title} />
         <div className="icons">
-          <HiMinusCircle className="icon" onClick={() => handleIconClick('hide', item.pId)} />
-          <RiCloseCircleFill className="icon" onClick={() => handleIconClick('delete', item.pId)} />
+          <HiMinusCircle className="icon" onClick={() => handleIconClick('hide')} />
+          <RiCloseCircleFill className="icon" onClick={() => handleIconClick('delete')} />
         </div>
       </div>
       {/* <textarea onChange={handleChange} name="content" value={item.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} /> */}
       <textarea name="content" value={item.content} style={{ visibility: hidden ? 'hidden' : 'visible' }} />
+      <Modal open={isModalOpen} onClose={handleClose} width="22rem">
+        <Modal.Header />
+        <Modal.Body>
+          <Text size={15}>정말 삭제하시겠습니까?</Text>
+        </Modal.Body>
+        <Modal.Footer>
+          <Row justify="space-around">
+            <Button light color="primary" size="sm" onClick={handleClose}>
+              취소
+            </Button>
+            <Button flat color="primary" size="sm" onClick={handleDeleteConfirm}>
+              확인
+            </Button>
+          </Row>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

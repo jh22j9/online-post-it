@@ -5,4 +5,5 @@ export enum ActionType {
   DELETE_POST_IT = 'deletePostIt',
   HIDE_POST_IT = 'hidePostIt',
   DELETE_BOARD = 'deleteBoard',
+  SET_MODAL = 'setModal',
 }

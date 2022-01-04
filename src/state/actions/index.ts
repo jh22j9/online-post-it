@@ -23,5 +23,16 @@ interface DeleteBoardAction {
   type: ActionType.DELETE_BOARD;
   payload?: number;
 }
+interface SetModalAction {
+  type: ActionType.SET_MODAL;
+  payload: boolean;
+}
 
-export type Action = AddBoardAction | AddPostItAction | SelectBoardAction | DeletePostItAction | HidePostItAction | DeleteBoardAction;
+export type Action =
+  | AddBoardAction
+  | AddPostItAction
+  | SelectBoardAction
+  | DeletePostItAction
+  | HidePostItAction
+  | DeleteBoardAction
+  | SetModalAction;

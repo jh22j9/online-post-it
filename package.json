@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nextui-org/react": "^1.0.2-alpha.1",
     "@reduxjs/toolkit": "^1.6.0",
     "immer": "^9.0.7",
     "react": "^17.0.2",

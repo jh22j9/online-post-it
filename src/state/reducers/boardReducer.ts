@@ -19,6 +19,7 @@ export interface BoardInterface {
 export interface StateInterface {
   currentBoard: BoardInterface;
   boardList: BoardInterface[];
+  isModalOpen: boolean;
 }
 
 const boardList = [
@@ -37,6 +38,7 @@ const postIt = {
 const initialState: StateInterface = {
   currentBoard: boardList[0],
   boardList: [...boardList],
+  isModalOpen: false,
 };
 
 const reducer = (state: StateInterface = initialState, action: Action): StateInterface => {
@@ -103,6 +105,9 @@ const reducer = (state: StateInterface = initialState, action: Action): StateInt
             draft.currentBoard = newBoardList[0];
           }
         }
+        break;
+      case ActionType.SET_MODAL:
+        draft.isModalOpen = action.payload;
         break;
       default:
         return state;
