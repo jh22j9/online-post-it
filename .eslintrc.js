@@ -126,6 +126,7 @@ module.exports = {
         format: ['PascalCase'],
       },
     ],
-    '@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
+    // '@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 };
