@@ -1,4 +1,10 @@
 import { createStore } from 'redux';
 import reducers from './reducers';
+import { persistStore } from 'redux-persist';
 
-export const store = createStore(reducers);
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const store = createStore(reducers, composeWithDevTools());
+const persistor = persistStore(store);
+
+export { store, persistor };
