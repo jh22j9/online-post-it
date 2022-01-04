@@ -38,7 +38,11 @@ const PostIt: React.FC<IProps> = ({ item }) => {
         dispatch(hidePostIt(item.pId));
         break;
       case 'delete':
-        dispatch(setModal(true));
+        if (item.title || item.content) {
+          dispatch(setModal(true));
+        } else {
+          dispatch(deletePostIt(item.pId));
+        }
         break;
       default:
         break;
