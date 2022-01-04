@@ -22,12 +22,6 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   };
 
   const dispatch = useDispatch();
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   setInput({
-  //     ...input,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const payload = {
