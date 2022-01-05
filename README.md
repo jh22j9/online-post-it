@@ -3,7 +3,7 @@
 `yarn start`로 실행할 수 있습니다. 
 
 ## 기술 스택
-> React, TypeScript, React-Redux, Sass(Scss), Redux-Persist
+> React, TypeScript, React-Redux, Sass(Scss), immer, Redux-Persist
 ## 구현한 기능
 - [x] 브라우저 상에서 동작하는 포스트잇 보드를 제작해주세요.
 - [x] 레이아웃은 좌측의 보드목록, 우측의 보드로 구성됩니다
