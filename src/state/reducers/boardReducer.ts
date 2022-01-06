@@ -7,7 +7,8 @@ export interface PostItInterface {
   [title: string]: any;
   content: string;
   positions: number[];
-  hidden: boolean;
+  hidden?: boolean | undefined;
+  isModalOpen?: boolean | undefined;
 }
 
 export interface BoardInterface {
@@ -19,7 +20,7 @@ export interface BoardInterface {
 export interface StateInterface {
   currentBoard: BoardInterface;
   boardList: BoardInterface[];
-  isModalOpen: boolean;
+  // isModalOpen: boolean;
 }
 
 const boardList = [{ bId: 1, name: 'Board', postItList: [] }];
@@ -30,12 +31,12 @@ const postIt = {
   content: '',
   positions: [],
   hidden: false,
+  isModalOpen: false,
 };
 
 const initialState: StateInterface = {
   currentBoard: boardList[0],
   boardList: [...boardList],
-  isModalOpen: false,
 };
 
 const reducer = (state: StateInterface = initialState, action: Action): StateInterface => {
@@ -104,7 +105,20 @@ const reducer = (state: StateInterface = initialState, action: Action): StateInt
         }
         break;
       case ActionType.SET_MODAL:
-        draft.isModalOpen = action.payload;
+        {
+          const { id, value } = action.payload;
+          const currentId = state.currentBoard.bId;
+          draft.boardList.forEach((board) => {
+            if (board.bId === currentId) {
+              board.postItList.forEach((item) => {
+                if (item.pId === id) {
+                  item.isModalOpen = value;
+                }
+              });
+              draft.currentBoard = board;
+            }
+          });
+        }
         break;
       case ActionType.UPDATE_BOARD_NAME:
         {

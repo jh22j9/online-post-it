@@ -26,9 +26,9 @@ export const deleteBoard = (id: number): Action => ({
   type: ActionType.DELETE_BOARD,
   payload: id,
 });
-export const setModal = (value: boolean): Action => ({
+export const setModal = (data: { id: number; value: boolean }): Action => ({
   type: ActionType.SET_MODAL,
-  payload: value,
+  payload: data,
 });
 export const updateBoardName = (data: { id: number; value: string }): Action => ({
   type: ActionType.UPDATE_BOARD_NAME,

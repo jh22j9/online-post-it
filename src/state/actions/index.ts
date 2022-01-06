@@ -25,7 +25,7 @@ interface DeleteBoardAction {
 }
 interface SetModalAction {
   type: ActionType.SET_MODAL;
-  payload: boolean;
+  payload: { id: number; value: boolean };
 }
 interface UpdateBoardNameAction {
   type: ActionType.UPDATE_BOARD_NAME;

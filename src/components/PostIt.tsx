@@ -2,8 +2,7 @@ import React from 'react';
 import { HiMinusCircle } from 'react-icons/hi';
 import { RiCloseCircleFill } from 'react-icons/ri';
 import { PostItInterface } from '../state/reducers/boardReducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { State } from '../state';
+import { useDispatch } from 'react-redux';
 import { deletePostIt, hidePostIt, setModal, updatePostIt } from '../state/action-creators';
 import { Modal, Text, Button, Row } from '@nextui-org/react';
 interface IProps {
@@ -11,9 +10,7 @@ interface IProps {
 }
 
 const PostIt: React.FC<IProps> = ({ item }) => {
-  const { currentBoard, isModalOpen } = useSelector((state: State) => state.postBoard);
-  const { postItList } = currentBoard;
-  const hidden = postItList.find((postIt) => postIt.pId === item.pId)?.hidden;
+  const { hidden, isModalOpen } = item;
 
   const [x, y] = item.positions;
   const style = {
@@ -39,7 +36,7 @@ const PostIt: React.FC<IProps> = ({ item }) => {
         break;
       case 'delete':
         if (item.title || item.content) {
-          dispatch(setModal(true));
+          dispatch(setModal({ id: item.pId, value: true }));
         } else {
           dispatch(deletePostIt(item.pId));
         }
@@ -50,11 +47,11 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   };
 
   const handleClose = () => {
-    dispatch(setModal(false));
+    dispatch(setModal({ id: item.pId, value: false }));
   };
 
   const handleDeleteConfirm = () => {
-    dispatch(setModal(false));
+    dispatch(setModal({ id: item.pId, value: false }));
     dispatch(deletePostIt(item.pId));
   };
 
