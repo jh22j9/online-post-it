@@ -10,7 +10,8 @@ interface IProps {
 }
 
 const PostIt: React.FC<IProps> = ({ item }) => {
-  const { hidden, isModalOpen } = item;
+  const { title, content, hidden, isModalOpen } = item;
+  const id = item.pId;
 
   const [x, y] = item.positions;
   const style = {
@@ -22,7 +23,7 @@ const PostIt: React.FC<IProps> = ({ item }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const payload = {
-      id: item.pId,
+      id,
       field: e.target.name,
       value: e.target.value,
     };
@@ -32,13 +33,13 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   const handleIconClick = (button: string) => {
     switch (button) {
       case 'hide':
-        dispatch(hidePostIt(item.pId));
+        dispatch(hidePostIt(id));
         break;
       case 'delete':
-        if (item.title || item.content) {
-          dispatch(setModal({ id: item.pId, value: true }));
+        if (title || content) {
+          dispatch(setModal({ id, value: true }));
         } else {
-          dispatch(deletePostIt(item.pId));
+          dispatch(deletePostIt(id));
         }
         break;
       default:
@@ -47,11 +48,11 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   };
 
   const handleClose = () => {
-    dispatch(setModal({ id: item.pId, value: false }));
+    dispatch(setModal({ id, value: false }));
   };
 
   const handleDeleteConfirm = () => {
-    dispatch(setModal({ id: item.pId, value: false }));
+    dispatch(setModal({ id, value: false }));
     dispatch(deletePostIt(item.pId));
   };
 
