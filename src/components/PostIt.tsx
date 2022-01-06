@@ -59,7 +59,7 @@ const PostIt: React.FC<IProps> = ({ item }) => {
   return (
     <div className="postIt-wrapper" style={style}>
       <div className="title-bar">
-        <input onChange={handleInputChange} type="text" name="title" value={item.title} />
+        <input onChange={handleInputChange} type="text" name="title" value={title} />
         <div className="icons">
           <HiMinusCircle className="icon" onClick={() => handleIconClick('hide')} />
           <RiCloseCircleFill className="icon" onClick={() => handleIconClick('delete')} />
